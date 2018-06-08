@@ -1,9 +1,5 @@
 package genius
 
-import (
-	"time"
-)
-
 //Response is an actual response object from Genius API
 //Consist links to possible retrievavable objects: Artist, Song, etc
 type Response struct {
@@ -14,9 +10,9 @@ type Response struct {
 	Response struct {
 		Artist     *Artist     `json:"artist"`
 		Song       *Song       `json:"song"`
+		Songs      []*Song     `json:"songs"`
 		Annotation *Annotation `json:"annotation"`
 		User       *User       `json:"user"`
-		Songs      []*Song     `json:"songs"`
 		NextPage   int         `json:"next_page"`
 		Hits       []*Hit      `json:"hits"`
 		WebPage    *WebPage    `json:"web_page"`
@@ -100,8 +96,8 @@ type Annotatable struct {
 	URL       string `json:"url"`
 
 	ClientTimestamps struct {
-		UpdatedByHumanAt time.Time `json:"updated_by_human_at"`
-		LyricsUpdatedAt  time.Time `json:"lyrics_updated_at"`
+		UpdatedByHumanAt int `json:"updated_by_human_at"`
+		LyricsUpdatedAt  int `json:"lyrics_updated_at"`
 	} `json:"client_timestamps"`
 }
 
@@ -228,9 +224,9 @@ type Stats struct {
 }
 
 type Album struct {
-	ApiPath     string  `json:api_path`
+	ApiPath     string  `json:"api_path"`
 	CoverArtURL string  `json:"cover_art_url"`
-	FullTitle   string  `json:full_title`
+	FullTitle   string  `json:"full_title"`
 	ID          int     `json:"id"`
 	Name        string  `json:"name"`
 	URL         string  `json:"url"`
@@ -240,40 +236,40 @@ type Album struct {
 //Song is song on Genius API
 type Song struct {
 	WithDescription
-	AnnotationCount          int                    `json:"annotation_count"`
-	ApiPath                  string                 `json:"api_path"`
-	EmbedContent             string                 `json:"embed_content"`
-	FactTrack                *FactTrack             `json:"fact_track"`
-	FeaturedVideo            bool                   `json:"features_video"`
-	FullTitle                string                 `json:"full_title"`
-	HeaderImageThumbnailURL  string                 `json:"header_image_thumbnail_url"`
-	HeaderImageURL           string                 `json:"header_image_url"`
-	ID                       int                    `json:"id"`
-	LyricsOwnerID            int                    `json:"lyrics_owner_id"`
-	LyricsState              string                 `json:"lyrics_state"`
-	Path                     string                 `json:"path"`
-	PyongsCount              int                    `json:"pyong_count"`
-	RecordingLocation        string                 `json:"recording_location"`
-	ReleaseDate              string                 `json:"release_date"`
-	SongArtImageThumbnailURL string                 `json:"song_art_image_thumbnail_url"`
-	SongArtImageURL          string                 `json:"song_art_image_url"`
-	Stats                    *Stats                 `json:"stats"`
-	Title                    string                 `json:"title"`
-	TitleWithFeatured        string                 `json:"title_with_featured"`
-	URL                      string                 `json:"url"`
-	CurrentUserMetadata      *UserMetadata          `json:"current_user_metadata"`
-	Album                    *Album                 `json:"album"`
-	CustomPerformances       []string               `json:"custom_performances"`
-	DescriptionAnnotation    *DescriptionAnnotation `json:"description_annotation"`
-	FeaturedArtists          []*Artist              `json:"featured_artist"`
-	Media                    []*Media               `json:"media"`
-	PrimaryArtist            *Artist                `json:"primary_artist"`
-	ProducerArtists          []*Artist              `json:"producer_artists"`
-	SongRelationships        []*SongRelationship    `json:"song_relationships"`
-	VerifiedAnnotationsBy    []*User                `json:"verified_annotations_by"`
-	VerifiedContributors     []*Contributor         `json:"verified_contributors"`
-	VerifiedLyricsBy         []*User                `json:"verified_lyrics_by"`
-	WriterArtists            []*Artist              `json:"writer_artists"`
+	AnnotationCount          int           `json:"annotation_count"`
+	ApiPath                  string        `json:"api_path"`
+	EmbedContent             string        `json:"embed_content"`
+	FactTrack                *FactTrack    `json:"fact_track"`
+	FeaturedVideo            bool          `json:"features_video"`
+	FullTitle                string        `json:"full_title"`
+	HeaderImageThumbnailURL  string        `json:"header_image_thumbnail_url"`
+	HeaderImageURL           string        `json:"header_image_url"`
+	ID                       int           `json:"id"`
+	LyricsOwnerID            int           `json:"lyrics_owner_id"`
+	LyricsState              string        `json:"lyrics_state"`
+	Path                     string        `json:"path"`
+	PyongsCount              int           `json:"pyong_count"`
+	RecordingLocation        string        `json:"recording_location"`
+	ReleaseDate              string        `json:"release_date"`
+	SongArtImageThumbnailURL string        `json:"song_art_image_thumbnail_url"`
+	SongArtImageURL          string        `json:"song_art_image_url"`
+	Stats                    *Stats        `json:"stats"`
+	Title                    string        `json:"title"`
+	TitleWithFeatured        string        `json:"title_with_featured"`
+	URL                      string        `json:"url"`
+	CurrentUserMetadata      *UserMetadata `json:"current_user_metadata"`
+	Album                    *Album        `json:"album"`
+	//CustomPerformances       []string               `json:"custom_performances"`
+	//DescriptionAnnotation    *DescriptionAnnotation `json:"description_annotation"`
+	FeaturedArtists       []*Artist           `json:"featured_artists"`
+	Media                 []*Media            `json:"media"`
+	PrimaryArtist         *Artist             `json:"primary_artist"`
+	ProducerArtists       []*Artist           `json:"producer_artists"`
+	SongRelationships     []*SongRelationship `json:"song_relationships"`
+	VerifiedAnnotationsBy []*User             `json:"verified_annotations_by"`
+	VerifiedContributors  []*Contributor      `json:"verified_contributors"`
+	VerifiedLyricsBy      []*User             `json:"verified_lyrics_by"`
+	WriterArtists         []*Artist           `json:"writer_artists"`
 }
 
 type Contributor struct {

@@ -141,7 +141,7 @@ func (c *Client) GetArtistSongs(id int, sort string, per_page int, page int) ([]
 }
 
 //GetSong returns Song object in response
-func (c *Client) GetSong(id int, textFormat string) (*Response, error) {
+func (c *Client) GetSong(id int, textFormat string) (*Song, error) {
 	url := fmt.Sprintf(baseURL+"/songs/%d", id)
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
@@ -165,7 +165,11 @@ func (c *Client) GetSong(id int, textFormat string) (*Response, error) {
 
 	response.Response.Song.Process(textFormat)
 
-	return &response, nil
+	if response.Meta.Status != 200 {
+		return nil, errors.New(response.Meta.Message)
+	}
+
+	return response.Response.Song, nil
 }
 
 //getArtist is a method taking id and textFormat as arguments to make request and return Artist object in response
