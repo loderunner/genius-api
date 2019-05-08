@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 )
 
 const (
@@ -118,8 +119,8 @@ func (c *Client) GetArtistSongs(id int, sort string, per_page int, page int) ([]
 
 	q := req.URL.Query()
 	q.Add("sort", sort)
-	q.Add("per_page", string(per_page))
-	q.Add("page", string(page))
+	q.Add("per_page", strconv.Itoa(per_page))
+	q.Add("page", strconv.Itoa(page))
 	req.URL.RawQuery = q.Encode()
 
 	bytes, err := c.doRequest(req)
